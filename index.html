@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vapeur & Saveurs</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .page {
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        background-color: #2ecc71; /* vert */
+        color: white;
+        text-align: center;
+        padding: 50px;
+        box-sizing: border-box;
+    }
+    .active {
+        display: block;
+    }
+    .blocks {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        gap: 20px;
+    }
+    .block {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255,255,255,0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: transform 0.2s;
+    }
+    .block:hover {
+        transform: scale(1.05);
+    }
+    .block img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    .liquid-img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    .liquid-name {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .buttons button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .like-btn {
+        background-color: #27ae60;
+        color: white;
+    }
+    .another-btn {
+        background-color: #f39c12;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div id="page1" class="page active">
+    <h1>Découvrez vos saveurs</h1>
+    <div class="blocks">
+        <div class="block" onclick="showLiquids('fruites')">
+            <img src="https://via.placeholder.com/100?text=Fruits" alt="Fruités">
+            <span>Fruités</span>
+        </div>
+        <div class="block" onclick="showLiquids('gourmands')">
+            <img src="https://via.placeholder.com/100?text=Gourmands" alt="Gourmands">
+            <span>Gourmands</span>
+        </div>
+        <div class="block" onclick="showLiquids('tabacs')">
+            <img src="https://via.placeholder.com/100?text=Tabacs" alt="Tabacs">
+            <span>Tabacs</span>
+        </div>
+    </div>
+</div>
+
+<!-- Page 2 -->
+<div id="page2" class="page">
+    <h1 id="liquid-category"></h1>
+    <img id="liquid-img" class="liquid-img" src="" alt="Liquide">
+    <div class="liquid-name" id="liquid-name"></div>
+    <div class="buttons">
+        <button class="like-btn" onclick="goToThankYou()">J'aime</button>
+        <button class="another-btn" onclick="showRandomLiquid()">Découvrir un autre</button>
+    </div>
+</div>
+
+<!-- Page 3 -->
+<div id="page3" class="page">
+    <h1>Merci et à bientôt dans votre magasin Vapeur & Saveurs</h1>
+</div>
+
+<script>
+    const liquids = {
+        fruites: [
+            {name: "Fraise, Pitaya", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/jNBO2uKExDrUZRyYQ5S6.jpg"},
+            {name: "Framboise, Cassis, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/CntTgf208Kr2Pf5KAzUH.jpg"},
+            {name: "Grenadine, Framboise, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/vwQHuIrn12i0gO5tdmLy.jpg"},
+            {name: "Fraise des bois, Cerise", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/gHuFIWZeDNVTVCpSMQDU.jpg"},
+            {name: "Fruits des bois, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/FtP4KzgBi3h53NQwTPcg.jpg"},
+            {name: "Mûre, Litchi, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/3KS7k7bUbIm834cYN1qn.jpg"},
+            {name: "Fruits rouges", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/gQv38iG8WBNvr5wIyHNp.jpg"},
+            {name: "Poire, Mangue", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/kHokWuQn3NK1vm4kS4KH.jpg"},
+            {name: "Banane, Fraise, Rétro", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/EZNhu33GbBHSYm2Ea7vV.jpg"}
+            // Tu peux continuer à ajouter toutes les autres entrées Fruités ici
+        ],
+        gourmands: [
+            {name: "Cake noisettes", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/VpmZu8AzHguPtgFW9OCT.jpg"},
+            {name: "Mousse Chocolat Blanc, Noisettes", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/HECvZawlR2DXRY0JbosP.jpg"},
+            {name: "Eclair Vanille", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/0HBQp6xBpCMz0W27CtkN.jpg"},
+            {name: "Baba au rhum", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/yZpFIl7P2PkQmewaWL84.jpg"}
+        ],
+        tabacs: [
+            {name: "Mrs O'neil", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/sxxpMpSi8vEVjoKmqatA.jpg"},
+            {name: "Kiddy James", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/aooXQwgvayUyVSfk4yFS.jpg"},
+            {name: "Old Jack", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/zop82tcLFUbFJQ1SN23M.jpg"},
+            {name: "Classic Blond", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/Dj8GSjPSl4FrvVeS9miS.jpg"}
+        ]
+    };
+
+    let currentCategory = '';
+    let currentIndex = 0;
+
+    function showLiquids(category) {
+        currentCategory = category;
+        showRandomLiquid();
+        document.getElementById('page1').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+        document.getElementById('liquid-category').innerText = category.charAt(0).toUpperCase() + category.slice(1);
+    }
+
+    function showRandomLiquid() {
+        const list = liquids[currentCategory];
+        currentIndex = Math.floor(Math.random() * list.length);
+        const liquid = list[currentIndex];
+        document.getElementById('liquid-img').src = liquid.img;
+        document.getElementById('liquid-name').innerText = liquid.name;
+    }
+
+    function goToThankYou() {
+        document.getElementById('page2').classList.remove('active');
+        document.getElementById('page3').classList.add('active');
+    }
+</script>
+
+</body>
+</html>
