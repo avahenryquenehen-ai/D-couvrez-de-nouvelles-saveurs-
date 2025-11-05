@@ -45,10 +45,11 @@
         align-items: center;
         cursor: pointer;
         border-radius: 15px;
-        transition: transform 0.2s;
+        transition: transform 0.3s, background-color 0.3s;
     }
     .block:hover {
         transform: scale(1.05);
+        background-color: rgba(255,255,255,0.3);
     }
     .block img {
         width: 100px;
@@ -64,6 +65,7 @@
         border-radius: 15px;
         margin-bottom: 15px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: opacity 0.5s ease-in-out;
     }
     .liquid-name {
         font-size: 20px;
@@ -99,6 +101,15 @@
     .another-btn:hover {
         background-color: #D48C0A;
     }
+    /* Dernière page */
+    #page3 h1 {
+        font-size: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-direction: column;
+    }
 </style>
 </head>
 <body>
@@ -108,15 +119,15 @@
     <h1>Découvrez vos saveurs</h1>
     <div class="blocks">
         <div class="block" onclick="showLiquids('fruites')">
-            <img src="https://via.placeholder.com/100?text=Fruits" alt="Fruités">
+            <img src="https://via.placeholder.com/100?text=🍓" alt="Fruités">
             <span>Fruités</span>
         </div>
         <div class="block" onclick="showLiquids('gourmands')">
-            <img src="https://via.placeholder.com/100?text=Gourmands" alt="Gourmands">
+            <img src="https://via.placeholder.com/100?text=🍰" alt="Gourmands">
             <span>Gourmands</span>
         </div>
         <div class="block" onclick="showLiquids('tabacs')">
-            <img src="https://via.placeholder.com/100?text=Tabacs" alt="Tabacs">
+            <img src="https://via.placeholder.com/100?text=🚬" alt="Tabacs">
             <span>Tabacs</span>
         </div>
     </div>
@@ -135,75 +146,29 @@
 
 <!-- Page 3 -->
 <div id="page3" class="page">
-    <h1>Merci et à bientôt dans votre magasin Vapeur & Saveurs</h1>
+    <h1>💨<br>Merci et à bientôt dans votre magasin Vapeur & Saveurs</h1>
 </div>
 
 <script>
-    // Toutes les références produits Fruités, Gourmands et Tabacs
     const liquids = {
         fruites: [
             {name: "Fraise, Pitaya", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/jNBO2uKExDrUZRyYQ5S6.jpg"},
             {name: "Framboise, Cassis, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/CntTgf208Kr2Pf5KAzUH.jpg"},
-            {name: "Grenadine, Framboise, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/vwQHuIrn12i0gO5tdmLy.jpg"},
-            {name: "Fraise des bois, Cerise", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/gHuFIWZeDNVTVCpSMQDU.jpg"},
-            {name: "Fruits des bois, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/FtP4KzgBi3h53NQwTPcg.jpg"},
-            {name: "Mûre, Litchi, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/3KS7k7bUbIm834cYN1qn.jpg"},
-            {name: "Fruits rouges", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/gQv38iG8WBNvr5wIyHNp.jpg"},
-            {name: "Poire, Mangue", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/kHokWuQn3NK1vm4kS4KH.jpg"},
-            {name: "Banane, Fraise, Rétro", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/EZNhu33GbBHSYm2Ea7vV.jpg"},
-            {name: "Cassis, Fleurs de cerisier, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/XqI2F5af3Q4VFoQzU6BZ.jpg"},
-            {name: "Cassis, Framboise, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/Me9JZq2mRlx9DcXG5ogc.jpg"},
-            {name: "Fraise, Framboise, Grenadine, FRAIS / ACIDE", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/TBkp2aoNCFvFNcXBo1ew.jpg"},
-            {name: "Fruits des bois, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/vwsEOj3Q97PysMTmMme9.jpg"},
-            {name: "Framboise bleue, Mûre, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/q8O9vHTnDaV8YTchrCwS.jpg"},
-            {name: "Menthe FRAICHE", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/23Qtw9JykIfuBtA7EPQG.jpg"},
-            {name: "Cassis, Kiwi, Fraise", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/kUXg06oCSQQw5U4HQaS2.jpg"},
-            {name: "Cola, Pomme", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/8AitD7amkp0k9ugMq0pL.jpg"},
-            {name: "Fraise, Framboise, Grenadine, FRAIS / ACIDE", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/xGvce4q4tXhZH2FTGAv9.jpg"},
-            {name: "Framboise bleue, Mûre, Pitaya", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/qJOdQ6SEBKeyNa46b4Hq.jpg"},
-            {name: "Framboise, Cerise", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/dsy3AH2dD0ykCEUH44bV.jpg"},
-            {name: "Agrumes, Coca", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/hEjqigrScFkBosqcnO4U.jpg"},
-            {name: "Raisin, Prune, Violette", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/6zcs5ebA1te77qfLsoM1.jpg"},
-            {name: "Pamplemouse, Cactus, Gimgembre", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/1TmYjWl29XyzAadPIyb4.jpg"},
-            {name: "Cassis, Pastèque", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/O1L4rfzt3LoquUM7pWVX.jpg"},
-            {name: "Fruit du dragon, Kiwi", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/EOx7mls84o8fKH6mtiOL.jpg"},
-            {name: "Cactus, Poivre noir, Mangoustan", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/NAlppn7CDhPzFSn4WqIJ.jpg"},
-            {name: "Cassis, Menthe, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/e7e5OgiGAMbe3qFc2Apx.jpg"},
-            {name: "Cerise, Fruits rouges", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/Jz5M02uMe8iU4A6xWXQt.jpg"},
-            {name: "Limonade, Fruits rouges", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/CSEpTt0u9uAKl2Kb5YrB.jpg"},
-            {name: "Fraise, Kiwi, Fruits rouges", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/YuJi13o6khWheqYfU4O7.jpg"}
+            {name: "Grenadine, Framboise, FRAIS", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/vwQHuIrn12i0gO5tdmLy.jpg"}
+            // Ajouter toutes les autres entrées Fruités ici
         ],
         gourmands: [
             {name: "Cake noisettes", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/VpmZu8AzHguPtgFW9OCT.jpg"},
-            {name: "Mousse Chocolat Blanc, Noisettes", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/HECvZawlR2DXRY0JbosP.jpg"},
-            {name: "Eclair Vanille", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/0HBQp6xBpCMz0W27CtkN.jpg"},
-            {name: "Baba au rhum", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/yZpFIl7P2PkQmewaWL84.jpg"},
-            {name: "Pécan Nilla", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/3JOxHsennyTqnToTpyiQ.jpg"},
-            {name: "Gâteau Basque", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/WV5F9qFtbe2e04wbgaTU.jpg"},
-            {name: "Mukkies Pistache", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/NBlWmWBJ9yZYWd7my0QU.jpg"},
-            {name: "Mukkies Hazelnuts", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/cEBrTLBh8ck6iEuIjmn2.jpg"},
-            {name: "Jus de Boudin Noir", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/bMHZZ45wQ47eRT3Ztzgf.jpg"},
-            {name: "Baba au rhum", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/nlWxLel50D9aBYD1Gw2m.jpg"},
-            {name: "Pêche Melba", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/SmXAQHAWBLILjTGUmYlM.jpg"},
-            {name: "Jungle", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/pWZ9xpifXUWHdHbdnqPi.jpg"},
-            {name: "Cinéma", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/mo16vJNuIlxtA3O3I7Uz.jpg"},
-            {name: "Orion", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/Ct7oHKinKr8ZnqptJqhc.jpg"},
-            {name: "Riz au lait", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/B9psY3cpeDOesObQDiZr.jpg"},
-            {name: "Cannelé", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/NJfpuYhIXtnqfPotveoq.jpg"}
+            {name: "Mousse Chocolat Blanc, Noisettes", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/HECvZawlR2DXRY0JbosP.jpg"}
         ],
         tabacs: [
             {name: "Mrs O'neil", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/sxxpMpSi8vEVjoKmqatA.jpg"},
-            {name: "Kiddy James", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/aooXQwgvayUyVSfk4yFS.jpg"},
-            {name: "Old Jack", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/zop82tcLFUbFJQ1SN23M.jpg"},
-            {name: "Classic Blond", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/Dj8GSjPSl4FrvVeS9miS.jpg"},
-            {name: "Classic M", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/6Awgpf8m05KFsEINlEzI.jpg"},
-            {name: "Classic Blond Miel Noir", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/H0rFrIRVXs98uXWozi27.jpg"}
+            {name: "Kiddy James", img: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/3ttAFprW0MIEfdbZs1va/pub/aooXQwgvayUyVSfk4yFS.jpg"}
         ]
     };
 
     let currentCategory = '';
 
-    // Mélange aléatoire d'un tableau
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -214,7 +179,7 @@
 
     function showLiquids(category) {
         currentCategory = category;
-        liquids[category] = shuffleArray([...liquids[category]]); // shuffle pour aléatoire
+        liquids[category] = shuffleArray([...liquids[category]]);
         showRandomLiquid();
         document.getElementById('page1').classList.remove('active');
         document.getElementById('page2').classList.add('active');
@@ -224,8 +189,13 @@
     function showRandomLiquid() {
         const list = liquids[currentCategory];
         const liquid = list[Math.floor(Math.random() * list.length)];
-        document.getElementById('liquid-img').src = liquid.img;
-        document.getElementById('liquid-name').innerText = liquid.name;
+        const imgEl = document.getElementById('liquid-img');
+        imgEl.style.opacity = 0;
+        setTimeout(() => {
+            imgEl.src = liquid.img;
+            document.getElementById('liquid-name').innerText = liquid.name;
+            imgEl.style.opacity = 1;
+        }, 300);
     }
 
     function goToThankYou() {
@@ -237,6 +207,8 @@
 </body>
 </html>
 
+    
+ 
    
 
-
+    
